@@ -7,21 +7,18 @@ const yargs = require('yargs');
 const notes = require('./notes');
 
 const argv = yargs.argv;
-const command = process.argv[2]
+const command = argv._[0]
 console.log('Command ', command);
-console.log(argv);
 
 if (command === 'add') {
-    notes.addNote(argv.title, argv.body);
+    const note = notes.addNote(argv.title, argv.body);
+    note ? console.log('Success') : console.log('Not cteate');
 } else if (command === 'list') {
-    console.log('list');
-
+    notes.getAll();
 } else if (command === 'read') {
-    console.log('reading node');
-
+    notes.getNote(argv.title)
 } else if (command === 'remove') {
-    console.log('removing node');
-
+    notes.removeNote(argv.title)
 } else {
     console.log('dones not exist');
 
