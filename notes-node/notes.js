@@ -30,15 +30,19 @@ const addNote = (title, body) => {
 
 
 const getAll = () => {
-    console.log('List');
+   return fetchNotes();
 };
 
 const getNote = (title) => {
-    console.log('Get note', title);
+    const notes = fetchNotes();
+    return  notes.find(item => item.title === title);
 };
 
 const removeNote = (title) => {
-    console.log('Remove note', title);
+    const notes = fetchNotes();
+    const clearedNotes = notes.filter(item => item.title !== title);
+    saveNotes(clearedNotes);
+    return notes.length !== clearedNotes.length;
 }
 
 module.exports = {
